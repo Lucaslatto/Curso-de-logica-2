@@ -4,27 +4,21 @@
 
     var tela = document.querySelector('canvas');
     var pincel = tela.getContext('2d');
-    pincel.fillStyle = 'lightgray';
+    pincel.fillStyle = 'white';
     pincel.fillRect(0, 0, 600, 400);
 
-    function desenhaCirculo(x, y, raio, cor) {
+    function desenhaQuadrado(x, y, tamanho, cor){
 
-        pincel.fillStyle = cor;
-        pincel.beginPath();
-        pincel.arc(x, y, raio, 0, 2*3.14);
-        pincel.fill();
+      pincel.fillStyle = cor;
+      pincel.fillRect(x, y, tamanho, tamanho);
+      pincel.strokeStyle = "black"
+      pincel.strokeRect(x, y, tamanho, tamanho);
+
     }
 
-    function desenhaflor(x, y,){
-
-      desenhaCirculo(x, y, 25, "red");
-      desenhaCirculo(x, y - 50, 25, "yellow");
-      desenhaCirculo(x, y + 50, 25, "blue");
-      desenhaCirculo(x - 50, y, 25, "green");
-      desenhaCirculo(x + 50, y, 25, "violet");
-    
-    }
-
-    desenhaflor(500, 300)
+    desenhaQuadrado(150, 200, 50, "green");
+    desenhaQuadrado(200, 200, 50, "green");  
+    desenhaQuadrado(250, 200, 50, "green");
+    desenhaQuadrado(300, 200, 50, "white");
 
 </script>
