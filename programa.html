@@ -37,6 +37,21 @@
     desenhaTexto(texto, x, 20);
   }
 
-  desenhaBarra(0, serie2015, cores, "2015");
-  desenhaBarra(50, serie2016, cores, "2016");
+  var tela = document.querySelector("canvas");
+  var pincel = tela.getContext("2d");
+  
+  function desenhaEsquadro(a, b, c, d, cor) { 
+
+    pincel.fillStyle = cor;
+    pincel.beginPath();
+    pincel.moveTo(a, b);
+    pincel.lineTo(a, d);
+    pincel.lineTo(c, d);
+    pincel.fill();
+  
+  }
+
+  desenhaEsquadro(0, 0, 400, 400, "black");
+  desenhaEsquadro(50, 135, 275, 350, "white");
 </script>
+
