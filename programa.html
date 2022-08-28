@@ -2,23 +2,41 @@
 
 <script>
 
-    var tela = document.querySelector('canvas');
-    var pincel = tela.getContext('2d');
-    pincel.fillStyle = 'white';
-    pincel.fillRect(0, 0, 600, 400);
+  function desenhaRetangulo(x, y, largura, altura, cor) {
 
-    function desenhaQuadrado(x, y, tamanho, cor){
+    var tela = document.querySelector("canvas");
+    var pincel = tela.getContext("2d");
 
-      pincel.fillStyle = cor;
-      pincel.fillRect(x, y, tamanho, tamanho);
-      pincel.strokeStyle = "black"
-      pincel.strokeRect(x, y, tamanho, tamanho);
+    pincel.fillStyle = cor;
+    pincel.fillRect(x, y, largura, altura,);
+    pincel.strokeStyle = "black";
+    pincel.strokeRect(x, y, largura, altura);
+  }
 
-    }
+  function desenhaTexto(texto, x, y) {
+    
+    var tela = document.querySelector("canvas");
+    var pincel = tela.getContext("2d");
 
-    desenhaQuadrado(150, 200, 50, "green");
-    desenhaQuadrado(200, 200, 50, "green");  
-    desenhaQuadrado(250, 200, 50, "green");
-    desenhaQuadrado(300, 200, 50, "white");
+    pincel.font = "15px Georgia";
+    pincel.fillStyle = "black";
+    pincel.fillText(texto, x, y)
+  }
 
+  var serie2015 = [50, 25, 20, 5];
+  var serie2016 = [65, 20, 13, 2];
+  var cores = ["blue", "green", "yellow", "red"];
+
+  function desenhaBarra (x, serie, cores, texto) {
+
+    desenhaRetangulo(x, 50, 50, serie[0], cores[0]);
+    desenhaRetangulo(x, 50 + serie[0], 50, serie[1], cores[1  ]);
+    desenhaRetangulo(x, 50 + serie[0] + serie[1], 50, serie[2], cores[2  ]);
+    desenhaRetangulo(x, 50 + serie[0] + serie[1] + serie[2], 50, serie[3], cores[3  ]);
+
+    desenhaTexto(texto, x, 20);
+  }
+
+  desenhaBarra(0, serie2015, cores, "2015");
+  desenhaBarra(50, serie2016, cores, "2016");
 </script>
