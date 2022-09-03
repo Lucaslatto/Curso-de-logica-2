@@ -13,53 +13,49 @@ var indiceCorAtual = 0;
 
 function mudaCor() {
 
-if(indiceCorAtual < 2) {
+  if(indiceCorAtual < 2) {
 
-  indiceCorAtual++;
-  return false
-} else {
+    indiceCorAtual++;
+    return false
+  } else {
 
-  indiceCorAtual = 0;
-  return false;
+    indiceCorAtual = 0;
+    return false;
+    }
 }
 
-}
-var raio = 10
+var desenha = false;
 
 function desenhaCirculo(evento) {
 
   var x = evento.pageX - tela.offsetLeft;
   var y = evento.pageY - tela.offsetTop;
 
-  if(evento.shiftKey) {
-  
-   raio = raio + 5;
-
-  }
-
-  if(raio <= 40) {
-  pincel.fillStyle = cores[indiceCorAtual];
-  pincel.beginPath();
-  pincel.arc(x, y, raio, 0, 2 * 3.14);
-  pincel.fill();
-  }else{
-
-    raio = 40
-  }
-
-  if(evento.altKey){
-
-    raio = raio - 5;
-  }
-
-  if(raio < 10){
-
-    raio = 10;
+  if(desenha) {
+    pincel.fillStyle = cores[indiceCorAtual];
+    pincel.beginPath();
+    pincel.arc(x, y, 10, 0, 2 * 3.14);
+    pincel.fill();
   }
 }
 
+tela.onmousemove = desenhaCirculo;
 
-tela.onclick = desenhaCirculo;
+function habilitaDesenho() {
+
+  desenha = true;
+  return false;
+ 
+}
+
+function desabilitaDesenho() {
+
+  desenha = false;
+  return false;
+}
+
+tela.onmousedown = habilitaDesenho;
+tela,onmouseup = desabilitaDesenho;
 tela.oncontextmenu = mudaCor;
 
 </script>
