@@ -2,57 +2,65 @@
 
 <script>
 
-  function desenhaRetangulo(x, y, largura, altura, cor) {
+var tela = document.querySelector("canvas");
+var pincel = tela.getContext("2d");
 
-    var tela = document.querySelector("canvas");
-    var pincel = tela.getContext("2d");
+pincel.fillStyle = "black"
+pincel.fillRect(0, 0, 600, 400);
 
-    pincel.fillStyle = cor;
-    pincel.fillRect(x, y, largura, altura,);
-    pincel.strokeStyle = "black";
-    pincel.strokeRect(x, y, largura, altura);
-  }
+var cores = ["blue", "red", "green"];
+var indiceCorAtual = 0;
 
-  function desenhaTexto(texto, x, y) {
-    
-    var tela = document.querySelector("canvas");
-    var pincel = tela.getContext("2d");
+function mudaCor() {
 
-    pincel.font = "15px Georgia";
-    pincel.fillStyle = "black";
-    pincel.fillText(texto, x, y)
-  }
+if(indiceCorAtual < 2) {
 
-  var serie2015 = [50, 25, 20, 5];
-  var serie2016 = [65, 20, 13, 2];
-  var cores = ["blue", "green", "yellow", "red"];
+  indiceCorAtual++;
+  return false
+} else {
 
-  function desenhaBarra (x, serie, cores, texto) {
+  indiceCorAtual = 0;
+  return false;
+}
 
-    desenhaRetangulo(x, 50, 50, serie[0], cores[0]);
-    desenhaRetangulo(x, 50 + serie[0], 50, serie[1], cores[1  ]);
-    desenhaRetangulo(x, 50 + serie[0] + serie[1], 50, serie[2], cores[2  ]);
-    desenhaRetangulo(x, 50 + serie[0] + serie[1] + serie[2], 50, serie[3], cores[3  ]);
+}
+var raio = 10
 
-    desenhaTexto(texto, x, 20);
-  }
+function desenhaCirculo(evento) {
 
-  var tela = document.querySelector("canvas");
-  var pincel = tela.getContext("2d");
+  var x = evento.pageX - tela.offsetLeft;
+  var y = evento.pageY - tela.offsetTop;
+
+  if(evento.shiftKey) {
   
-  function desenhaEsquadro(a, b, c, d, cor) { 
+   raio = raio + 5;
 
-    pincel.fillStyle = cor;
-    pincel.beginPath();
-    pincel.moveTo(a, b);
-    pincel.lineTo(a, d);
-    pincel.lineTo(c, d);
-    pincel.fill();
-  
   }
 
-  desenhaEsquadro(0, 0, 400, 400, "black");
-  desenhaEsquadro(50, 135, 275, 350, "white");
+  if(raio <= 40) {
+  pincel.fillStyle = cores[indiceCorAtual];
+  pincel.beginPath();
+  pincel.arc(x, y, raio, 0, 2 * 3.14);
+  pincel.fill();
+  }else{
+
+    raio = 40
+  }
+
+  if(evento.altKey){
+
+    raio = raio - 5;
+  }
+
+  if(raio < 10){
+
+    raio = 10;
+  }
+}
+
+
+tela.onclick = desenhaCirculo;
+tela.oncontextmenu = mudaCor;
 
 </script>
 
