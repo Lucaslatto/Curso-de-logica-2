@@ -1,27 +1,21 @@
 <canvas width="600" height="400"></canvas>
+<meta charset="UTF-8">
+
+Escolha a cor <input type="color">
 
 <script>
 
 var tela = document.querySelector("canvas");
 var pincel = tela.getContext("2d");
+var htmlcor = document.querySelector("input");
+
 
 pincel.fillStyle = "black"
 pincel.fillRect(0, 0, 600, 400);
 
-var cores = ["blue", "red", "green"];
-var indiceCorAtual = 0;
+function tiraMenu() {
 
-function mudaCor() {
-
-  if(indiceCorAtual < 2) {
-
-    indiceCorAtual++;
-    return false
-  } else {
-
-    indiceCorAtual = 0;
-    return false;
-    }
+  return false;
 }
 
 var desenha = false;
@@ -32,7 +26,7 @@ function desenhaCirculo(evento) {
   var y = evento.pageY - tela.offsetTop;
 
   if(desenha) {
-    pincel.fillStyle = cores[indiceCorAtual];
+    pincel.fillStyle = htmlcor.value;
     pincel.beginPath();
     pincel.arc(x, y, 10, 0, 2 * 3.14);
     pincel.fill();
@@ -56,7 +50,7 @@ function desabilitaDesenho() {
 
 tela.onmousedown = habilitaDesenho;
 tela,onmouseup = desabilitaDesenho;
-tela.oncontextmenu = mudaCor;
+tela.oncontextmenu = tiraMenu;
 
 </script>
 
