@@ -6,12 +6,25 @@
     var pincel = tela.getContext("2d");
     var x = 20;
     var y = 20;
+    var raio = 20;
 
+    // códigos das setas do teclado //
+
+    var esquerda = 37;
+    var cima = 38;
+    var direita = 39;
+    var baixo = 40;
+
+    // taxa de incremento // 
+
+    var taxaIncremento = 10;
+    
+    
     function desenhaCirculo(x, y,) {
 
         pincel.fillStyle = "black";
         pincel.beginPath();
-        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.arc(x + taxaIncremento, y + taxaIncremento, raio, 0, 2 * Math.PI);
         pincel.fill();
     }
 
@@ -19,23 +32,42 @@
 
         pincel.clearRect(0, 0, 600, 400);
     }
-
-    var raio = 20;
     
     function atualizaTela() {
 
       limpaTela();
       desenhaCirculo(x, y,);
     }
-      
+
+    function leDoTeclado(evento) {
+
+     if(esquerda == evento.keyCode) {
+
+        x = x - taxaIncremento;
+     }
+
+     if(direita == evento.keyCode) {
+
+        x = x + taxaIncremento;
+    }
+
+    if(cima == evento.keyCode) {
+
+        y = y - taxaIncremento;
+    }
+
+    if(baixo == evento.keyCode) {
+
+        y = y + taxaIncremento;
+    }
+     
+
+     console.log(evento.keyCode)
+
+    }
+
+    document.onkeydown = leDoTeclado;
 
     setInterval(atualizaTela, 100);
-
-
-
-
-
-
-
 
 </script>
